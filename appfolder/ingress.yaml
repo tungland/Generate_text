@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ordlikhet
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: nginx-ingress-dh-secret
+    hosts:
+     - "dh.nb.no"
+  rules:
+  - host: "dh.nb.no"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/ordlikhet"
+        backend:
+          service:
+            name: ordlikhet-service
+            port:
+              number: 80

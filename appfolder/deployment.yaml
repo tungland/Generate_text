@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ordlikhet-deployment
+  labels:
+    app: ordlikhet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ordlikhet
+  template:
+    metadata:
+      labels:
+        app: ordlikhet
+    spec:
+      containers:
+      - name: ordlikhet
+        image: gcr.io/norwegian-language-bank/ordlikhet:272a2c17-5560-452b-93b2-971209b6df1c
+        command: [ "/bin/bash" ]
+        args: [ "-c", "streamlit run query_model.py --server.port 8501 --server.baseUrlPath /ordlikhet --browser.gatherUsageStats=False"]
+        ports:
+        - containerPort: 8501
+        resources:
+          limits:
+            cpu: 750m
+            ephemeral-storage: 1Gi
+            memory: 4Gi
+          requests:
+            cpu: 750m
+            ephemeral-storage: 1Gi
+            memory: 4Gi
