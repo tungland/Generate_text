@@ -20,7 +20,9 @@ st.set_page_config(page_title=None, page_icon=None, layout="wide", initial_sideb
 st.title("Ordlikheter")
 st.write("### med [Gensims](https://radimrehurek.com/gensim/) ordmodeller konstruert med data fra [dhlab](https://dh.nb.no)")
 
+
 if 'model' not in st.session_state: 
+
     model_file = 'fifth_capital_ddc.model' # eller annet filnavn - pass på sti
     model = KeyedVectors.load(model_file)    #load_word2vec_format(model_file, binary=True)
     d = model.wv
@@ -29,19 +31,22 @@ else:
     d = st.session_state['model']
 
 
-
+st.session_state.update(st.session_state)
+    
 # Test med most_similar for forskjellige ord for evaluering.
 word_col, anta_col = st.columns([5, 2])
-
+if "words" not in st.session_state:
+    st.session_state.words = 'hallo'
+    
 with word_col:
-    words = st.text_input("Angi noen ord for å andreord i nærheten", "")
+    words = st.text_input("Listen med ord blir koblet de som ligger nærmest i bruk", st.session_state.words, key="words")
     if ',' in words:
         words = [x.strip() for x in words.split(',')]
     else:
         words = words.split()
         
 with anta_col:
-    antall_ord = st.number_input("Størrelse på listen", min_value=1, max_value=30, value=5)
+    antall_ord = st.number_input("Antall nærliggende ord", min_value=1, max_value=30, value=10, key="antall_ord")
 
 T = ""
 for x in words:
@@ -54,3 +59,4 @@ for x in words:
 st.markdown(T)
     
 
+st.session_state.update()

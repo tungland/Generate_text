@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: ordlikhet
-        image: gcr.io/norwegian-language-bank/ordlikhet:272a2c17-5560-452b-93b2-971209b6df1c
+        image: gcr.io/norwegian-language-bank/ordlikhet:310eacbc-9dac-472f-8f53-e1f11b3d271c
         command: [ "/bin/bash" ]
-        args: [ "-c", "streamlit run query_model.py --server.port 8501 --server.baseUrlPath /ordlikhet --browser.gatherUsageStats=False"]
+        args: [ "-c", "streamlit run 01_query_model.py --server.port 8501 --server.baseUrlPath /ordlikhet --browser.gatherUsageStats=False"]
         ports:
         - containerPort: 8501
         resources:
