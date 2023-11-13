@@ -18,7 +18,7 @@ def home():
                 <li><strong>Prepare a JSON Request</strong>: Create a JSON object</li>
                 <li><strong>Send the Request</strong>: Send a POST request to https://dh.nb.no/run/wordvector/get_vector with the JSON payload.</li>
                 <li>You can use tools like Postman, or a simple curl command in the terminal</li>
-                <li><strong>Example</strong>: curl -X POST https://dh.nb.no/run/wordvector/get_vector -H "Content-Type: application/json" -d '{"word": "example"}'</li>
+                <li><strong>Example</strong>: curl -X POST https://dh.nb.no/run/wordvector/get_vector -H "Content-Type: application/json" -d '{"words": ["example", "test"]}'</li>
                 <li><strong>Receive the Response</strong>: The response will be a JSON object containing the word vector</li>
             </ol>
         </body>
